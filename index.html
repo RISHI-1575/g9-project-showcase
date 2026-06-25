@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G9 — Final Year Project Proposals</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg-primary:#ffffff;
+    --bg-secondary:#f5f5f3;
+    --bg-tertiary:#efede8;
+    --text-primary:#1a1a18;
+    --text-secondary:#5c5c58;
+    --text-tertiary:#9a9a94;
+    --border-light:rgba(0,0,0,0.1);
+    --border-med:rgba(0,0,0,0.18);
+    --radius-md:8px;
+    --radius-lg:12px;
+    --font:'Inter',system-ui,-apple-system,sans-serif;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --bg-primary:#1c1c1a;
+      --bg-secondary:#242422;
+      --bg-tertiary:#2a2a28;
+      --text-primary:#e8e8e4;
+      --text-secondary:#a0a09a;
+      --text-tertiary:#606060;
+      --border-light:rgba(255,255,255,0.08);
+      --border-med:rgba(255,255,255,0.15);
+    }
+  }
+  body{font-family:var(--font);background:var(--bg-tertiary);color:var(--text-primary);line-height:1.6;font-size:15px}
+  a{color:inherit;text-decoration:none}
+  .page{max-width:900px;margin:0 auto;padding:2rem 1.25rem 4rem}
+
+  .hero{text-align:center;padding:3rem 1rem 2.5rem;border-bottom:0.5px solid var(--border-light);margin-bottom:2.5rem}
+  .hero-tag{display:inline-block;background:#EEEDFE;color:#3C3489;font-size:12px;font-weight:600;padding:5px 16px;border-radius:20px;margin-bottom:1rem;letter-spacing:0.03em}
+  .hero h1{font-size:28px;font-weight:600;line-height:1.25;margin-bottom:0.6rem;color:var(--text-primary)}
+  .hero p{font-size:15px;color:var(--text-secondary);max-width:540px;margin:0 auto}
+
+  .project-block{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:2.5rem}
+  .project-header{padding:1.5rem 1.75rem 1.25rem;border-bottom:0.5px solid var(--border-light)}
+  .project-domain{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem}
+  .project-name{font-size:24px;font-weight:700;margin-bottom:0.2rem;color:var(--text-primary)}
+  .project-tagline{font-size:14px;color:var(--text-secondary);margin-bottom:1rem}
+  .pill-row{display:flex;flex-wrap:wrap;gap:6px}
+  .pill{font-size:12px;padding:4px 10px;border-radius:20px;font-weight:500}
+  .pill-purple{background:#EEEDFE;color:#3C3489}
+  .pill-teal{background:#E1F5EE;color:#085041}
+  .pill-coral{background:#FAECE7;color:#712B13}
+  .pill-gray{background:#F1EFE8;color:#444441}
+
+  .oneliner{padding:1.125rem 1.75rem;background:var(--bg-secondary);border-bottom:0.5px solid var(--border-light);font-size:15px;color:var(--text-primary);line-height:1.65}
+
+  .project-body{padding:1.75rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  @media(max-width:640px){.project-body{grid-template-columns:1fr}.competitor-row{grid-template-columns:1fr}}
+
+  .section-label{font-size:11px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.75rem}
+  .how-list{list-style:none;padding:0}
+  .how-list li{font-size:14px;color:var(--text-primary);padding:7px 0;border-bottom:0.5px solid var(--border-light);display:flex;gap:10px;align-items:flex-start;line-height:1.55}
+  .how-list li:last-child{border-bottom:none;padding-bottom:0}
+  .how-num{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .num-purple{background:#EEEDFE;color:#3C3489}
+  .num-coral{background:#FAECE7;color:#712B13}
+  .num-teal{background:#E1F5EE;color:#085041}
+
+  .sdg-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:1.5rem}
+  .sdg-box{display:flex;flex-direction:column;align-items:center;gap:5px;width:62px}
+  .sdg-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+  .sdg-lbl{font-size:10px;color:var(--text-secondary);text-align:center;line-height:1.25}
+
+  .competitor-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .comp-card{background:var(--bg-secondary);border-radius:var(--radius-md);padding:10px 12px;border:0.5px solid var(--border-light)}
+  .comp-name{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:3px}
+  .comp-gap{font-size:12px;color:var(--text-secondary);line-height:1.4}
+
+  .diff-wrap{padding:0 1.75rem 1.75rem}
+  .diff-block{border-left:3px solid #534AB7;padding:1rem 1.25rem;border-radius:0 var(--radius-md) var(--radius-md) 0;background:var(--bg-secondary)}
+  .diff-block.teal{border-left-color:#0F6E56}
+  .diff-block.coral{border-left-color:#993C1D}
+  .diff-title{font-size:13px;font-weight:600;color:#3C3489;margin-bottom:0.6rem}
+  .diff-block.teal .diff-title{color:#085041}
+  .diff-block.coral .diff-title{color:#712B13}
+  .diff-list{list-style:none;padding:0}
+  .diff-list li{font-size:13px;color:var(--text-primary);padding:3px 0 3px 16px;position:relative;line-height:1.55}
+  .diff-list li::before{content:'→';position:absolute;left:0;color:#534AB7;font-size:12px;top:4px}
+  .diff-block.teal .diff-list li::before{color:#0F6E56}
+  .diff-block.coral .diff-list li::before{color:#993C1D}
+
+  .compare-section{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:2rem}
+  .compare-header{padding:1.25rem 1.75rem;border-bottom:0.5px solid var(--border-light);font-size:18px;font-weight:600;color:var(--text-primary)}
+  table.ct{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+  table.ct th{font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;padding:10px 14px;border-bottom:0.5px solid var(--border-light);text-align:left;background:var(--bg-secondary)}
+  table.ct td{padding:10px 14px;border-bottom:0.5px solid var(--border-light);color:var(--text-primary);vertical-align:top;line-height:1.5}
+  table.ct tr:last-child td{border-bottom:none}
+  table.ct .row-label{font-weight:600;color:var(--text-secondary);font-size:12px}
+  .badge{font-size:11px;padding:3px 9px;border-radius:10px;white-space:nowrap;font-weight:500;display:inline-block}
+  .b-green{background:#E1F5EE;color:#085041}
+  .b-amber{background:#FAEEDA;color:#633806}
+  .b-gray{background:#F1EFE8;color:#444441}
+  .b-red{background:#FCEBEB;color:#791F1F}
+
+  .rec-block{background:var(--bg-primary);border:2px solid #185FA5;border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:2rem}
+  .rec-tag{display:inline-block;background:#E6F1FB;color:#0C447C;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:0.75rem}
+  .rec-title{font-size:20px;font-weight:700;margin-bottom:0.6rem;color:var(--text-primary)}
+  .rec-body{font-size:14px;color:var(--text-secondary);line-height:1.7}
+
+  .score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:1.25rem 1.75rem;background:var(--bg-secondary);border-top:0.5px solid var(--border-light)}
+  .score-card{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-md);padding:1rem;text-align:center}
+  .score-name{font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:0.35rem;text-transform:uppercase;letter-spacing:0.05em}
+  .score-num{font-size:28px;font-weight:700;color:var(--text-primary)}
+  .score-card.winner .score-num{color:#085041}
+  .score-card.winner{border-color:#0F6E56}
+
+  footer{text-align:center;color:var(--text-tertiary);font-size:12px;padding-top:2rem;border-top:0.5px solid var(--border-light)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-tag">G9 &mdash; Final Year Project Proposals</div>
+    <h1>Three ideas. One team. One direction.</h1>
+    <p>A structured comparison of three research-grade project proposals for the 2025&ndash;26 capstone &mdash; built for clarity, not just to impress.</p>
+  </div>
+
+  <!-- AEGIS-X -->
+  <div class="project-block">
+    <div class="project-header">
+      <div class="project-domain" style="color:#534AB7">Privacy &amp; Security &middot; LLM / NLP</div>
+      <div class="project-name">AEGIS-X</div>
+      <div class="project-tagline">Adaptive, context-aware guard for information security in generative AI</div>
+      <div class="pill-row">
+        <span class="pill pill-purple">NLP</span>
+        <span class="pill pill-purple">Adversarial ML</span>
+        <span class="pill pill-purple">Transformer fine-tuning</span>
+        <span class="pill pill-purple">Differential privacy</span>
+        <span class="pill pill-gray">Python</span>
+        <span class="pill pill-gray">HuggingFace</span>
+        <span class="pill pill-gray">FastAPI</span>
+        <span class="pill pill-gray">Streamlit</span>
+      </div>
+    </div>
+    <div class="oneliner">
+      A smart privacy layer that sits between you and any LLM. It reads your prompt, understands context (not just keywords), transforms secrets into safe equivalents, sends the clean version to ChatGPT, and restores real values in the answer &mdash; so you get a useful response without leaking anything.
+    </div>
+    <div class="project-body">
+      <div>
+        <div class="section-label">How it works</div>
+        <ul class="how-list">
+          <li><span class="how-num num-purple">1</span>User types a prompt containing sensitive data</li>
+          <li><span class="how-num num-purple">2</span>Fine-tuned DeBERTa reads full context &mdash; not just keywords &mdash; and labels each span: public / PII / confidential</li>
+          <li><span class="how-num num-purple">3</span>Sensitive spans are <em>transformed</em>, not blanked &mdash; &ldquo;Project Bluebird &nbsp;&#8377;12Cr&rdquo; &rarr; &ldquo;an internal initiative&rdquo;</li>
+          <li><span class="how-num num-purple">4</span>Adversarial attacker network tries to reverse-engineer secrets; sanitizer trains to beat it (min-max SGD)</li>
+          <li><span class="how-num num-purple">5</span>Clean prompt reaches the LLM; answer comes back and real values are restored via encrypted local vault</li>
+          <li><span class="how-num num-purple">6</span>User gets a full, usable answer. The LLM never saw the secret.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label">SDG alignment</div>
+        <div class="sdg-row">
+          <div class="sdg-box"><div class="sdg-circle" style="background:#EEEDFE;color:#3C3489">9</div><div class="sdg-lbl">Industry &amp; innovation</div></div>
+          <div class="sdg-box"><div class="sdg-circle" style="background:#E1F5EE;color:#085041">10</div><div class="sdg-lbl">Reduced inequality</div></div>
+          <div class="sdg-box"><div class="sdg-circle" style="background:#E6F1FB;color:#0C447C">16</div><div class="sdg-lbl">Peace &amp; institutions</div></div>
+          <div class="sdg-box"><div class="sdg-circle" style="background:#FAEEDA;color:#633806">17</div><div class="sdg-lbl">Partnerships</div></div>
+        </div>
+        <div class="section-label">Competitors &amp; gap</div>
+        <div class="competitor-row">
+          <div class="comp-card"><div class="comp-name">Securiti Gencore</div><div class="comp-gap">Context-aware LLM firewall &mdash; closed source, cloud-only, no Indian data coverage</div></div>
+          <div class="comp-card"><div class="comp-name">Protecto</div><div class="comp-gap">Reversible tokens for PHI &mdash; healthcare focused, no adversarial training guarantee</div></div>
+          <div class="comp-card"><div class="comp-name">Microsoft Presidio</div><div class="comp-gap">Open-source PII tool &mdash; regex + NER only, misses contextual confidentiality entirely</div></div>
+          <div class="comp-card"><div class="comp-name">Nightfall / Lakera</div><div class="comp-gap">Enterprise DLP &mdash; expensive, no formal leakage bound, not Indian-context aware</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="diff-wrap">
+      <div class="diff-block">
+        <div class="diff-title">What makes AEGIS-X different</div>
+        <ul class="diff-list">
+          <li>Adversarially trained sanitizer &mdash; a second network attacks it during training, forcing genuine leakage resistance</li>
+          <li>Formal differential-privacy bound: measurable guarantee of what the LLM provider can learn</li>
+          <li>Indian-context data: Aadhaar, PAN, Hinglish, Indian business terminology &mdash; no product covers this</li>
+          <li>Utility-preserving transformation (not blanking) &mdash; LLM still gives a full, useful answer</li>
+          <li>Fully open, reproducible benchmark released publicly &mdash; something commercial tools refuse to do</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chakravyuh-2 -->
+  <div class="project-block">
+    <div class="project-header">
+      <div class="project-domain" style="color:#993C1D">AI Security &middot; Offensive + Defensive</div>
+      <div class="project-name">Chakravyuh-2</div>
+      <div class="project-tagline">Co-evolutionary AI red-team agent that hacks LLM systems &mdash; and builds the fix</div>
+      <div class="pill-row">
+        <span class="pill pill-coral">Reinforcement learning</span>
+        <span class="pill pill-coral">Self-play</span>
+        <span class="pill pill-coral">LLM agents</span>
+        <span class="pill pill-coral">Mechanistic interpretability</span>
+        <span class="pill pill-gray">LangGraph</span>
+        <span class="pill pill-gray">PyTorch / TRL</span>
+        <span class="pill pill-gray">Ollama</span>
+        <span class="pill pill-gray">Python</span>
+      </div>
+    </div>
+    <div class="oneliner">
+      An autonomous system that attacks AI apps the way a real hacker would &mdash; then learns, adapts, and patches the defense. A multi-agent pipeline where an attacker and defender co-evolve via self-play until the system is provably hardened, with mechanistic explanations for every vulnerability found.
+    </div>
+    <div class="project-body">
+      <div>
+        <div class="section-label">How it works</div>
+        <ul class="how-list">
+          <li><span class="how-num num-coral">1</span>Recon agent profiles the target AI app &mdash; what tools it has, what secrets it guards</li>
+          <li><span class="how-num num-coral">2</span>RL attacker generates adversarial prompts; learns from success/failure via PPO reward signal</li>
+          <li><span class="how-num num-coral">3</span>Judge agent evaluates: did the target leak a secret? misuse a tool? violate policy?</li>
+          <li><span class="how-num num-coral">4</span>Attacker and defender train against each other in self-play &mdash; like AlphaGo vs itself &mdash; until equilibrium</li>
+          <li><span class="how-num num-coral">5</span>Interpretability layer probes model activations to explain <em>why</em> each jailbreak works</li>
+          <li><span class="how-num num-coral">6</span>Reporter auto-generates an OWASP-mapped PDF audit with patch suggestions</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label">SDG alignment</div>
+        <div class="sdg-row">
+          <div class="sdg-box"><div class="sdg-circle" style="background:#FAECE7;color:#712B13">9</div><div class="sdg-lbl">Industry &amp; innovation</div></div>
+          <div class="sdg-box"><div class="sdg-circle" style="background:#E6F1FB;color:#0C447C">16</div><div class="sdg-lbl">Peace &amp; institutions</div></div>
+          <div class="sdg-box"><div class="sdg-circle" style="background:#EAF3DE;color:#27500A">11</div><div class="sdg-lbl">Sustainable cities</div></div>
+        </div>
+        <div class="section-label">Competitors &amp; gap</div>
+        <div class="competitor-row">
+          <div class="comp-card"><div class="comp-name">Garak (NVIDIA)</div><div class="comp-gap">Static template scanner &mdash; can&rsquo;t learn or adapt to a specific target&rsquo;s defenses</div></div>
+          <div class="comp-card"><div class="comp-name">PyRIT (Microsoft)</div><div class="comp-gap">A framework, not an agent &mdash; no self-play, no defense generation, no explanations</div></div>
+          <div class="comp-card"><div class="comp-name">General Analysis / Repello</div><div class="comp-gap">Commercial agentic red-teaming &mdash; no interpretability, no open benchmark</div></div>
+          <div class="comp-card"><div class="comp-name">Metis / AutoDAN-Turbo</div><div class="comp-gap">Research papers on RL attackers &mdash; no defender side, no explanation layer</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="diff-wrap">
+      <div class="diff-block coral">
+        <div class="diff-title">What makes Chakravyuh-2 different</div>
+        <ul class="diff-list">
+          <li>Attacker and defender co-evolve in self-play &mdash; nobody ships both sides training together toward equilibrium</li>
+          <li>Attacks multi-agent tool-using systems (cascade: A compromises B) &mdash; OWASP ASI 2026 frontier, under-tooled</li>
+          <li>Mechanistic explanation: which activations fired, why the jailbreak worked &mdash; not just &ldquo;it worked&rdquo;</li>
+          <li>Output is a hardened defense + explainability report, not just an exploit list</li>
+          <li>Open reproducible benchmark for attacker/defender pairs &mdash; no standard one exists today</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saarathi -->
+  <div class="project-block">
+    <div class="project-header">
+      <div class="project-domain" style="color:#0F6E56">Smart Cities &middot; Reinforcement Learning</div>
+      <div class="project-name">Saarathi</div>
+      <div class="project-tagline">Equity-aware, fault-tolerant, learned-communication traffic brain for Indian cities</div>
+      <div class="pill-row">
+        <span class="pill pill-teal">Multi-agent RL</span>
+        <span class="pill pill-teal">Emergent communication</span>
+        <span class="pill pill-teal">Graph attention networks</span>
+        <span class="pill pill-teal">Multi-objective optimization</span>
+        <span class="pill pill-gray">SUMO simulator</span>
+        <span class="pill pill-gray">PyTorch</span>
+        <span class="pill pill-gray">Ray RLlib</span>
+        <span class="pill pill-gray">Python</span>
+      </div>
+    </div>
+    <div class="oneliner">
+      Every traffic junction is an autonomous agent. Agents don&rsquo;t just coordinate &mdash; they learn what to say to each other, optimize for wait time, emissions, ambulance corridors, and neighborhood fairness simultaneously, and keep working even when junctions go offline or get compromised.
+    </div>
+    <div class="project-body">
+      <div>
+        <div class="section-label">How it works</div>
+        <ul class="how-list">
+          <li><span class="how-num num-teal">1</span>Each junction runs its own RL agent watching real-time traffic: vehicle count, queue length, speed</li>
+          <li><span class="how-num num-teal">2</span>Agents learn what to communicate via graph-attention differentiable messaging &mdash; not hard-coded outflow numbers</li>
+          <li><span class="how-num num-teal">3</span>Multi-objective reward: minimize wait + cut emissions + green corridor for ambulances + fairness score across zones</li>
+          <li><span class="how-num num-teal">4</span>Byzantine fault tolerance: if a hub fails or is tampered with, neighbors self-compensate seamlessly</li>
+          <li><span class="how-num num-teal">5</span>Trained on SUMO with real Bengaluru junction topology: lane-less, mixed Indian traffic (bikes, autos, trucks)</li>
+          <li><span class="how-num num-teal">6</span>Benchmarked vs fixed-time signals + SURTRAC-style coordination on all metrics simultaneously</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label">SDG alignment</div>
+        <div class="sdg-row">
+          <div class="sdg-box"><div class="sdg-circle" style="background:#EAF3DE;color:#27500A">11</div><div class="sdg-lbl">Sustainable cities</div></div>
+          <div class="sdg-box"><div class="sdg-circle" style="background:#E1F5EE;color:#085041">10</div><div class="sdg-lbl">Reduced inequality</div></div>
+          <div class="sdg-box"><div class="sdg-circle" style="background:#FAEEDA;color:#633806">13</div><div class="sdg-lbl">Climate action</div></div>
+          <div class="sdg-box"><div class="sdg-circle" style="background:#FCEBEB;color:#791F1F">3</div><div class="sdg-lbl">Good health (ambulance)</div></div>
+          <div class="sdg-box"><div class="sdg-circle" style="background:#EEEDFE;color:#3C3489">9</div><div class="sdg-lbl">Innovation</div></div>
+        </div>
+        <div class="section-label">Competitors &amp; gap</div>
+        <div class="competitor-row">
+          <div class="comp-card"><div class="comp-name">SURTRAC (CMU)</div><div class="comp-gap">Decentralized peer-to-peer &mdash; but hand-designed messages, no equity, no fault tolerance</div></div>
+          <div class="comp-card"><div class="comp-name">SCATS / SCOOT</div><div class="comp-gap">Centralized 1970s systems &mdash; no RL, no Indian traffic, single point of failure</div></div>
+          <div class="comp-card"><div class="comp-name">MARL literature (2024&ndash;25)</div><div class="comp-gap">Dozens of papers &mdash; all Western lane-disciplined traffic, none do equity or Byzantine resilience</div></div>
+          <div class="comp-card"><div class="comp-name">Siemens / Kapsch ITS</div><div class="comp-gap">Commercial ITS &mdash; proprietary hardware, not research-open, no RL or equity objective</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="diff-wrap">
+      <div class="diff-block teal">
+        <div class="diff-title">What makes Saarathi different</div>
+        <ul class="diff-list">
+          <li>Learned inter-agent communication &mdash; hubs discover what to signal, not told (emergent protocol via graph-attention)</li>
+          <li>Equity objective: explicitly prevents congestion from being pushed onto lower-income neighborhoods</li>
+          <li>Byzantine resilience: stays operational when hubs fail or are hacked &mdash; no existing traffic MARL paper tests this</li>
+          <li>Indian heterogeneous traffic: lane-less, mixed vehicle types &mdash; absent from all existing products and papers</li>
+          <li>Multi-objective Pareto frontier: quantified trade-off curve between delay, emissions, and equity &mdash; publishable</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison -->
+  <div class="compare-section">
+    <div class="compare-header">Side-by-side comparison</div>
+    <div style="overflow-x:auto">
+      <table class="ct">
+        <colgroup><col style="width:20%"><col style="width:26.6%"><col style="width:26.6%"><col style="width:26.6%"></colgroup>
+        <thead>
+          <tr>
+            <th></th>
+            <th>AEGIS-X</th>
+            <th>Chakravyuh-2</th>
+            <th>Saarathi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="row-label">Core ML</td><td>Adversarial min-max transformer (GAN-like)</td><td>Self-play RL + mechanistic interpretability</td><td>MARL + learned emergent comms</td></tr>
+          <tr><td class="row-label">Batch standout</td><td><span class="badge b-amber">Medium-high</span></td><td><span class="badge b-amber">High</span></td><td><span class="badge b-green">Highest — only RL/sim</span></td></tr>
+          <tr><td class="row-label">Global novelty</td><td><span class="badge b-amber">High</span></td><td><span class="badge b-green">Highest</span></td><td><span class="badge b-amber">High</span></td></tr>
+          <tr><td class="row-label">Demo moment</td><td>Split-screen: secret masked vs what LLM saw</td><td>Live AI-hacks-AI + arms-race chart</td><td>City grid: gridlock → smooth flow + ambulance corridor</td></tr>
+          <tr><td class="row-label">Build risk</td><td><span class="badge b-amber">Medium</span></td><td><span class="badge b-red">High (RL convergence)</span></td><td><span class="badge b-green">Low-medium</span></td></tr>
+          <tr><td class="row-label">Publishability</td><td>Strong (formal privacy bound)</td><td>Strong (frontier topic)</td><td><span class="badge b-green">Strongest (equity angle)</span></td></tr>
+          <tr><td class="row-label">SDGs covered</td><td>4 goals</td><td>3 goals</td><td><span class="badge b-green">5 goals</span></td></tr>
+          <tr><td class="row-label">Social impact</td><td>Privacy for all AI users</td><td>Safer AI systems</td><td><span class="badge b-green">Millions of commuters</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-name">AEGIS-X</div>
+        <div class="score-num">45<span style="font-size:14px;font-weight:400;color:var(--text-tertiary)">/60</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-name">Chakravyuh-2</div>
+        <div class="score-num">48<span style="font-size:14px;font-weight:400;color:var(--text-tertiary)">/60</span></div>
+      </div>
+      <div class="score-card winner">
+        <div class="score-name">Saarathi</div>
+        <div class="score-num">50<span style="font-size:14px;font-weight:400;color:var(--text-tertiary)">/60</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommendation -->
+  <div class="rec-block">
+    <div class="rec-tag">Mentor recommendation</div>
+    <div class="rec-title">Saarathi &mdash; best risk-adjusted choice for a top-of-batch result</div>
+    <div class="rec-body">
+      It is the only RL/simulation project in a batch of 23 groups, giving it the highest batch-standout score with zero direct competition. The equity and Byzantine-resilience angles are genuinely under-researched, making it publishable. SUMO is free, open, and CPU-runnable &mdash; build risk is manageable. The demo (a city moving smoothly vs gridlock, with a live ambulance corridor) is understood by any audience. The multi-objective Pareto analysis is a clean, defensible research contribution. If the team is highly motivated and confident in RL, Chakravyuh-2 is the higher-ceiling gamble &mdash; but Saarathi is the call for a reliable, impressive, research-grade outcome.
+    </div>
+  </div>
+
+  <footer>G9 &mdash; Rishi Shashikanth &middot; P Yukthesh &middot; Vimal &nbsp;&middot;&nbsp; BG Institute of Technology &nbsp;&middot;&nbsp; 2025&ndash;26</footer>
+
+</div>
+</body>
+</html>
